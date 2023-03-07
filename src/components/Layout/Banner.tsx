@@ -1,10 +1,4 @@
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import React, { Fragment } from 'react'
 import { FaInfoCircle, FaPlayCircle } from 'react-icons/fa'
 import { Item } from '../../pages/utils/types'
 import type { NextPage } from 'next'
@@ -12,17 +6,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Button from '../Shared/Button'
 import { AnimatePresence, motion } from 'framer-motion'
-import MovieSlider from '../Movie/MovieSlider'
-import { SwiperProps } from 'swiper/react'
-
-// https://image.tmdb.org/t/p/original/${main?.backdrop_path}
+import { imageOriginal } from '../../pages/utils/constants'
 
 interface BannerProps {
   main: Item
-  data: Item[]
 }
 
-const Banner: NextPage<BannerProps> = ({ main, data }) => {
+const Banner: NextPage<BannerProps> = ({ main }) => {
   const bannerVariants = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
@@ -30,17 +20,6 @@ const Banner: NextPage<BannerProps> = ({ main, data }) => {
   }
 
   const transition = [0.33, 1, 0.68, 1]
-  const [index, setIndex] = useState<number>(0)
-
-  // ----------Error----------------
-  // const activeSlide = useMemo(() => data[index], [data, index])
-  // const handleSlideChange: SwiperProps['onSlideChange'] = useCallback(
-  //   (swiper) => {
-  //     swiper.loopCreate
-  //     setIndex(swiper.realIndex)
-  //   },
-  //   []
-  // )
 
   return (
     <Fragment>
@@ -55,7 +34,7 @@ const Banner: NextPage<BannerProps> = ({ main, data }) => {
             key={main.title}
           >
             <Image
-              src={`https://image.tmdb.org/t/p/original/${main?.backdrop_path}`}
+              src={`${imageOriginal(main?.backdrop_path)}`}
               className="absolute top-0 left-0 hidden h-screen w-screen object-cover opacity-[0.5] md:block"
               alt=""
               layout="fill"
@@ -100,12 +79,6 @@ const Banner: NextPage<BannerProps> = ({ main, data }) => {
         </AnimatePresence>
         <div className="banner__overlay--down absolute left-0 bottom-0 h-16 w-full"></div>
       </div>
-      {data && (
-        <div className="w-full px-4 pb-12 md:px-2">
-          {/* <MovieSlider data={data} onSlideChange={handleSlideChange} /> */}
-          <MovieSlider data={data} loop={false} />
-        </div>
-      )}
     </Fragment>
   )
 }

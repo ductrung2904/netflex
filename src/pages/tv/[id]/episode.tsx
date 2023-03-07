@@ -5,7 +5,7 @@ import { Fragment, useState } from 'react'
 import StarRating from '../../../components/Display/StarRating'
 import Meta from '../../../components/Shared/Meta'
 import { getTVSeasons } from '../../api/api'
-import { embedEpisode } from '../../utils/constants'
+import { embedEpisode, imageOriginal, imageResize } from '../../utils/constants'
 import { Detail, Episode, Season } from '../../utils/types'
 
 interface TVEpisodeProps {
@@ -30,7 +30,7 @@ const TVEpisode: NextPage<TVEpisodeProps> = ({
       <Meta
         title={`${data.name} - Episode ${episodeId} - Seasons ${seasonId} - Netflex`}
         description="Watch TV Episode"
-        image={`https://image.tmdb.org/t/p/original/${episode.still_path}`}
+        image={`${imageOriginal(episode.still_path)}`}
       />
       <div className="mt-28 flex flex-col gap-8 px-5 lg:flex-row lg:px-20">
         <div className="flex-grow">
@@ -76,7 +76,7 @@ const TVEpisode: NextPage<TVEpisodeProps> = ({
               >
                 <div className="flex-shrink-0">
                   <Image
-                    src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                    src={`${imageResize(item.poster_path)}`}
                     width={45}
                     height={68}
                     alt=""
@@ -110,7 +110,7 @@ const TVEpisode: NextPage<TVEpisodeProps> = ({
                         <div className="flex w-full cursor-pointer items-center overflow-hidden rounded-lg bg-dark-darken transition duration-300 hover:brightness-[80%]">
                           <Image
                             className="mr-4 flex-shrink-0 rounded-md object-cover"
-                            src={`https://image.tmdb.org/t/p/original/${child.still_path}`}
+                            src={`${imageResize(child.still_path)}`}
                             width={154}
                             height={87}
                             alt=""

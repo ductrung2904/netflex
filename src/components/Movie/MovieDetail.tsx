@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import { FaPlayCircle, FaTimes, FaYoutube } from 'react-icons/fa'
+import { imageOriginal } from '../../pages/utils/constants'
 import { Cast, Detail, Item, VideoTrailer } from '../../pages/utils/types'
 import StarRating from '../Display/StarRating'
 import Button from '../Shared/Button'
@@ -32,12 +33,12 @@ const MovieDetail: NextPage<MovieDetailProps> = ({
           media_type === 'movie' ? data.title + ' - Movie' : data.name + ' - TV'
         }
         description="Viewing Info"
-        image={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
+        image={`${imageOriginal(data.backdrop_path)}`}
       />
       <div className="relative min-h-screen">
         <div
           style={{
-            backgroundImage: `url("https://image.tmdb.org/t/p/original/${data.backdrop_path}")`,
+            backgroundImage: `url("${imageOriginal(data.backdrop_path)}")`,
             backgroundPosition: '50%',
           }}
           className="mask-image absolute top-0 left-0 z-[-1] block h-[350px] w-screen bg-cover bg-no-repeat opacity-50 md:h-[500px]"
@@ -46,7 +47,7 @@ const MovieDetail: NextPage<MovieDetailProps> = ({
           <div className="flex w-full flex-shrink-0 items-start justify-center md:w-[300px]">
             <Image
               className="rounded-xl"
-              src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
+              src={`${imageOriginal(data.poster_path)}`}
               width={300}
               height={450}
               alt=""
@@ -143,7 +144,7 @@ const MovieDetail: NextPage<MovieDetailProps> = ({
                 {casts.map((item) => (
                   <div key={item.id} className="flex flex-col items-center">
                     <Image
-                      src={`https://image.tmdb.org/t/p/original/${item.profile_path}`}
+                      src={`${imageOriginal(item.profile_path)}`}
                       className="h-auto w-full rounded-xl object-cover"
                       width={168}
                       height={251}

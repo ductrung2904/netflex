@@ -5,7 +5,7 @@ import { relative } from 'path'
 import StarRating from '../../../components/Display/StarRating'
 import Meta from '../../../components/Shared/Meta'
 import { getWatchMovieContent } from '../../api/api'
-import { embedMovie } from '../../utils/constants'
+import { embedMovie, imageOriginal, imageResize } from '../../utils/constants'
 import { Detail, Item } from '../../utils/types'
 
 interface WatchMovieProps {
@@ -19,7 +19,7 @@ const WatchMovie: NextPage<WatchMovieProps> = ({ data, similar }) => {
       <Meta
         title={`${data.title} - Watch Episode - Netflex`}
         description="Watch the movie"
-        image={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
+        image={`${imageOriginal(data.backdrop_path)}`}
       />
       <div className="mt-28 flex flex-col gap-8 px-5 lg:flex-row lg:px-20">
         <div className="flex-grow">
@@ -58,7 +58,7 @@ const WatchMovie: NextPage<WatchMovieProps> = ({ data, similar }) => {
                 <div className="flex cursor-pointer gap-4 pr-5">
                   <img
                     className="h-[120px] w-[80px] object-cover transition duration-300 group-hover:brightness-75"
-                    src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                    src={`${imageResize(item.poster_path)}`}
                     alt=""
                   />
                   <div className="ml-4 py-3 transition duration-300 group-hover:text-orange">

@@ -11,10 +11,9 @@ interface HomePages {
     [id: string]: Item[]
   }
   main: Item
-  data2: Item[]
 }
 
-const Home: NextPage<HomePages> = ({ data, main, data2 }) => {
+const Home: NextPage<HomePages> = ({ data, main }) => {
   return (
     <>
       <Meta
@@ -23,7 +22,7 @@ const Home: NextPage<HomePages> = ({ data, main, data2 }) => {
         image=""
       />
       <div className="min-h-screen text-white">
-        <Banner main={main} data={data2} />
+        <Banner main={main} />
         {Object.keys(data).map((item, index) => (
           <Fragment key={item}>
             <h1

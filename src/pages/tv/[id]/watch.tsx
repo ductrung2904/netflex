@@ -5,6 +5,7 @@ import { Fragment, useState } from 'react'
 import StarRating from '../../../components/Display/StarRating'
 import Meta from '../../../components/Shared/Meta'
 import { getTVSeasons } from '../../api/api'
+import { imageOriginal, imageResize } from '../../utils/constants'
 import { Detail, Season } from '../../utils/types'
 
 interface WatchTVProps {
@@ -20,7 +21,7 @@ const WatchTV: NextPage<WatchTVProps> = ({ data, seasons }) => {
       <Meta
         title={`${data.name} - Seasons - Netflex`}
         description="View Seasons"
-        image={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
+        image={`${imageOriginal(data.backdrop_path)}`}
       />
 
       <div className="flex justify-center">
@@ -28,7 +29,7 @@ const WatchTV: NextPage<WatchTVProps> = ({ data, seasons }) => {
           <div className="flex flex-col gap-4 md:flex-row">
             <div className="flex flex-shrink-0 items-center justify-center md:w-[200px]">
               <Image
-                src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
+                src={`${imageResize(data.poster_path)}`}
                 width={200}
                 height={300}
                 alt=""
@@ -65,7 +66,7 @@ const WatchTV: NextPage<WatchTVProps> = ({ data, seasons }) => {
                 <div className="h-[231px] w-[154px] flex-shrink-0">
                   <Image
                     className="h-full w-full"
-                    src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
+                    src={`${imageResize(item.poster_path)}`}
                     width={154}
                     height={231}
                     alt=""
@@ -109,13 +110,13 @@ const WatchTV: NextPage<WatchTVProps> = ({ data, seasons }) => {
                           </div>
                           <Image
                             className="mr-4 flex-shrink-0 rounded-md object-cover"
-                            src={`https://image.tmdb.org/t/p/original/${child.still_path}`}
+                            src={`${imageResize(child.still_path)}`}
                             width={154}
                             height={87}
                             alt=""
                           />
-                          <div className="ml-4 flex-grow">
-                            <h1>{child.name}</h1>
+                          <div className="ml-4 flex-1 flex-grow">
+                            <h1 className="mr-4">{child.name}</h1>
                             <p className="text-gray-400">{child.air_date}</p>
                           </div>
                         </div>
